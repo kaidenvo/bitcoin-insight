@@ -1,0 +1,49 @@
+.block-table-header {
+    font-weight: bold;
+}
+
+.block-table-header,
+.block-table-row {
+    display: flex;
+    border-top: 1px solid #efefef;
+    height: 34px;
+    line-height: 34px;
+    font-size: 11px;
+    overflow: hidden;
+}
+
+.block-table-row.odd {
+    background-color: #f9f9f9;
+}
+
+.column {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.block-height {
+    width: 120px;
+    text-align: left;
+}
+
+.block-ts > time {
+    flex: 2 1 auto;
+    text-align: left;
+    min-width: 100px;
+}
+
+.block-transaction {
+    flex: 1 1 auto;
+    text-align: right;
+}
+
+.block-miner {
+    width: 80px;
+    display: block;
+    text-align: right;
+}
+
+.block-size {
+    text-align: right;
+    min-width: 80px;
+}
