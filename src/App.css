@@ -1,3 +1,20 @@
+#root {
+    height: 100%;
+}
+
+#wrap,
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: auto;
+    padding: 0 0;
+}
+
+.container {
+    flex: 1 1 auto;
+}
+
 .mobile-search .form-group {
     display: flex;
 }
