@@ -6,8 +6,8 @@ export function requestBlockInfo() {
     return { type: REQUEST_BLOCK_INFO, loading: true };
 }
 
-export function receiveBlockInfo(info) {
-    return { type: RECEIVE_BLOCK_INFO, loading: false, data: info };
+export function receiveBlockInfo(block, info) {
+    return { type: RECEIVE_BLOCK_INFO, loading: false, block, data: info };
 }
 
 export function errorReceiveBlockInfo(error) {

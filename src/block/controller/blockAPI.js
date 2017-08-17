@@ -27,7 +27,7 @@ export function fetchBlockInfo(block) {
         dispatch(requestBlockInfo());
         return fetch(`https://insight.bitpay.com/api/block/${block}`)
             .then(response => response.json())
-            .then(json => dispatch(receiveBlockInfo(json)))
+            .then(json => dispatch(receiveBlockInfo(block, json)))
             .catch(e => dispatch(errorReceiveBlockInfo));
     };
 }
