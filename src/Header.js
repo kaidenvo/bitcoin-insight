@@ -1,4 +1,10 @@
+import 'react-select/dist/react-select.css';
 import React, { PureComponent } from 'react';
+import Dropdown from 'react-select';
+
+const options = ['USD', 'BTC', 'mBTC', 'bits'].map(lbl => {
+    return { label: lbl, value: lbl, clearableValue: false };
+});
 
 export default class Header extends PureComponent {
     render() {
@@ -15,6 +21,13 @@ export default class Header extends PureComponent {
                             </a>
                         </div>
                         <div className="navbar-collapse collapse">
+                            <ul className="nav navbar-nav">
+                                <li className="ng-scope">
+                                    <a href="/blocks" className="ng-binding">
+                                        Blocks
+                                    </a>
+                                </li>
+                            </ul>
                             <span className="hidden-xs navbar-form navbar-left ng-scope">
                                 <form
                                     id="search-form"
@@ -31,10 +44,25 @@ export default class Header extends PureComponent {
                                     </div>
                                 </form>
                             </span>
+                            <div
+                                className="nav navbar-form navbar-nav navbar-right"
+                                style={{
+                                    width: 100
+                                }}
+                            >
+                                <Dropdown
+                                    clearable={false}
+                                    options={options}
+                                    value={options[0].label}
+                                    onValuesChange={this.handleDropdownChange}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         );
     }
+
+    handleDropdownChange = e => {};
 }

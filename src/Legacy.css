@@ -6263,7 +6263,7 @@ h6,
     color: #fff;
 }
 #search.loading {
-    /*background-image: url(../img/loading.gif);*/
+    background-image: url(./img/loading.gif);
     background-position: 5px center;
     background-repeat: no-repeat;
     padding-left: 25px;
@@ -6272,7 +6272,7 @@ h6,
     display: inline-block;
     width: 16px;
     height: 11px;
-    /*background: transparent url(../img/loading.gif) no-repeat;*/
+    background: transparent url(./img/loading.gif) no-repeat;
     margin-left: 5px;
 }
 #search {
@@ -6694,8 +6694,8 @@ h6,
     background-size: 80px;
     width: 30%;
 }
-#powered a.angularjs {
-    background-image: url(./img/angularjs.png);
+#powered a.reactjs {
+    background-image: url(./img/reactjs.png);
     background-size: 50px;
     width: 20%;
 }

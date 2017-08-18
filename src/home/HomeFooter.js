@@ -4,27 +4,27 @@ import { Link } from 'react-router-dom';
 export default class Footer extends PureComponent {
     render() {
         return (
-            <div className="col-xs-12 col-md-4 col-gray">
+            <div className="col-gray">
                 <h2>
                     <span className="ng-scope">About</span>
                 </h2>
                 <p>
                     <strong className="ng-scope">insight</strong>
-                    <span className="ng-scope">is an</span>
+                    <span className="ng-scope">&nbsp;is an</span>
                     <Link to="https://insight.is/" className="ng-scope">
-                        open-source Bitcoin blockchain explorer
+                        &nbsp;open-source Bitcoin blockchain explorer
                     </Link>
                     <span className="ng-scope">
-                        {' '}with complete REST and websocket APIs that can be
+                        &nbsp;with complete REST and websocket APIs that can be
                         used for writing web wallets and other apps that need
                         more advanced blockchain queries than provided by
-                        bitcoind RPC. Check out the{' '}
+                        bitcoind RPC. Check out the
                     </span>
                     <Link
                         to="https://github.com/bitpay/insight-ui"
                         className="ng-scope"
                     >
-                        source code
+                        &nbsp;source code
                     </Link>
                     <span className="ng-scope">.</span>
                 </p>
@@ -54,9 +54,9 @@ export default class Footer extends PureComponent {
                         title="Bitcore"
                     />
                     <Link
-                        to="http://angularjs.org"
-                        className="angularjs"
-                        title="AngularJS"
+                        to="https://facebook.github.io/react/"
+                        className="reactjs"
+                        title="ReactJS"
                     />
                     <Link
                         to="https://code.google.com/p/leveldb/"

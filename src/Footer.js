@@ -9,11 +9,11 @@ export default class Footer extends PureComponent {
                     <div className="links m20t pull-left">
                         <span className="languages" />
                         &nbsp; [
-                        <Link to="messages/verify">
+                        <Link to="#">
                             <span className="ng-scope">verify message</span>
                         </Link>
-                        <span> · </span>
-                        <Link to="tx/send">
+                        <span>·</span>
+                        <Link to="#">
                             <span className="ng-scope">
                                 broadcast transaction
                             </span>
@@ -24,7 +24,8 @@ export default class Footer extends PureComponent {
                         className="insight m10v pull-right"
                         to="http://insight.is"
                     >
-                        insight <small className="ng-binding">API v0.4.3</small>
+                        insight
+                        <small className="ng-binding">API v0.4.3</small>
                     </Link>
                 </div>
             </div>
