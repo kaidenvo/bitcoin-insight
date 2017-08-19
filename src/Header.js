@@ -1,13 +1,23 @@
 import 'react-select/dist/react-select.css';
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Dropdown from 'react-select';
+import { search, fetchCurrencyExchange } from './block/controller/blockAPI';
+import {
+    setCurrency,
+    currencyOptions
+} from './block/controller/currencyActions';
 
-const options = ['USD', 'BTC', 'mBTC', 'bits'].map(lbl => {
-    return { label: lbl, value: lbl, clearableValue: false };
-});
+class Header extends PureComponent {
+    state = {
+        searchQuery: ''
+    };
 
-export default class Header extends PureComponent {
     render() {
+        const { searchQuery } = this.state;
+        const { currency } = this.props;
+
         return (
             <div
                 className="navbar navbar-default navbar-fixed-top"
@@ -38,6 +48,9 @@ export default class Header extends PureComponent {
                                         <input
                                             id="search"
                                             type="text"
+                                            value={searchQuery}
+                                            onChange={this.handleSearch}
+                                            onKeyDown={this.handleKeyDown}
                                             className="form-control ng-isolate-scope ng-pristine ng-valid"
                                             placeholder="Search for block, transaction or address"
                                         />
@@ -52,9 +65,9 @@ export default class Header extends PureComponent {
                             >
                                 <Dropdown
                                     clearable={false}
-                                    options={options}
-                                    value={options[0].label}
-                                    onValuesChange={this.handleDropdownChange}
+                                    options={currencyOptions}
+                                    value={currency || currencyOptions[0].label}
+                                    onChange={this.handleDropdownChange}
                                 />
                             </div>
                         </div>
@@ -64,5 +77,34 @@ export default class Header extends PureComponent {
         );
     }
 
-    handleDropdownChange = e => {};
+    handleSearch = e => {
+        this.setState({ searchQuery: e.target.value });
+    };
+
+    handleKeyDown = e => {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            // enter
+            const { props: { history }, state: { searchQuery } } = this;
+            search(searchQuery)
+                .then(url => history.replace(url))
+                .catch(e => console.log(e));
+        }
+    };
+
+    handleDropdownChange = e => {
+        const { dispatch } = this.props;
+        dispatch(setCurrency(e.value));
+
+        if (e.value === 'USD') {
+            dispatch(fetchCurrencyExchange());
+        }
+    };
 }
+
+function mapStateToProps(state) {
+    const { blockReducers } = state || {};
+    return blockReducers;
+}
+
+export default connect(mapStateToProps)(withRouter(Header));

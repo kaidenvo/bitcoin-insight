@@ -1,17 +1,23 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { fetchBlockInfo } from './controller/blockAPI';
 import Moment from 'react-moment';
+import { connect } from 'react-redux';
+
+import { fetchBlockInfo, fetchCurrencyExchange } from './controller/blockAPI';
+import { currencyOptions } from './controller/currencyActions';
 
 class BlockDetail extends PureComponent {
     componentDidMount() {
-        const { dispatch, match: { params } = {} } = this.props;
+        const { dispatch, rate, currency, match: { params } = {} } = this.props;
         const { id } = params || {};
         dispatch(fetchBlockInfo(id));
+
+        if (!rate || !currency || currency === 'USD') {
+            dispatch(fetchCurrencyExchange());
+        }
     }
 
     render() {
-        const { loading, match: { params } = {} } = this.props;
+        const { currency, rate, loading, match: { params } = {} } = this.props;
         const { id } = params || {};
         const data = this.props[id];
         const {
@@ -32,6 +38,17 @@ class BlockDetail extends PureComponent {
         } =
             data || {};
 
+        const unit = currency || currencyOptions[0].value;
+        let unitValue = reward;
+        if (unit === 'mBTC') {
+            unitValue = reward * 1000;
+        } else if (unit === 'bits') {
+            unitValue = reward * 1000000;
+        } else if (unit === 'USD') {
+            unitValue = Math.round(reward * (rate || 1) * 100) / 100;
+        }
+
+        const value = `${unitValue}${unit}`;
         const { poolName, url } = poolInfo || {};
 
         return loading
@@ -40,7 +57,7 @@ class BlockDetail extends PureComponent {
                   <h1 className="ng-binding">
                       Block #{height}
                   </h1>
-                  <div data-ng-if="block.hash" className="ng-scope">
+                  <div className="ng-scope">
                       <div className="well well-sm ellipsis">
                           <strong>BlockHash</strong>&nbsp;
                           <span className="txid text-muted ng-binding">
@@ -100,7 +117,7 @@ class BlockDetail extends PureComponent {
                                               </strong>
                                           </td>
                                           <td className="text-right text-muted ng-binding">
-                                              {reward}
+                                              {value}
                                           </td>
                                       </tr>
                                       <tr>
